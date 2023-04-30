@@ -130,8 +130,8 @@
 }
 
 *::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
  }
  *::-webkit-scrollbar-thumb {
      background: var(--scrollbarColor) ;
@@ -241,9 +241,14 @@ select[multiple="multiple"] {
     height: auto;
 }
 
+.node-docker-images input[type='text'] {
+    width: auto !important;
+}
+
 input[type='text'],input[type='password'] {
     width: 100%;
 }
+
 code {
     color: #0099CC;
 }
@@ -847,7 +852,6 @@ img[src*="/luci-static/resources/icons/loading.gif"] {
 
 .ifacebox-body img {
     background-size: 20px 20px;
-    padding: 0 0 0 20px;
     width:20px !important;
     height:20px !important;
     padding: 0 0 0 20px !important;
@@ -1609,14 +1613,9 @@ table {
     border-spacing: 0;
     border-collapse: collapse;
     width: 100%;
-    border: 0px solid #eee;
+    border: 0px solid #eee !important;
     margin: 0 !important;
 }
-
-/* fix qwrt network share table style */
-/* table tr th:empty {
-    display: none;
-} */
 
 strong {
     font-weight: bold;
@@ -1637,18 +1636,20 @@ strong {
 
 }
 
-/* fixed DHCPv6 lease table host names incorrectly displayed */
-#lease6_status_table > tbody > .cbi-section-table-row.cbi-rowstyle-1 div,
-#lease6_status_table > tbody > .cbi-section-table-row.cbi-rowstyle-2 div{
-  min-width:100%;
-}
-
 table > tbody > tr > td, table > tbody > tr > th, table > tfoot > tr > td, table > tfoot > tr > th, table > thead > tr > td, table > thead > tr > th {
     padding: 12px;
     white-space: nowrap;
     line-height:1.5;
     vertical-align: middle !important;
 }
+
+.node-services-appfilter table > tbody > tr > th,
+.node-services-appfilter table > tbody > tr > td,
+.node-nlbw-usage table > tbody > tr > th, 
+.node-nlbw-usage table > tbody > tr > td {
+    text-align: center;
+}
+
 
 table > tbody > tr {
     border-bottom: var(--cbilineColor) !important;
@@ -1659,11 +1660,11 @@ table > tbody > tr:last-child {
 }
 
 .cbi-section-table-cell {
-    text-align: center !important;
+    text-align: center;
 }
 
 .cbi-section-table-row {
-    text-align: center !important;
+    text-align: center;
 }
 
 .cbi-section-remove{
@@ -1674,6 +1675,18 @@ table > tbody > tr:last-child {
 }
 fieldset > table > tbody > tr:nth-of-type(odd) {
     background-color: var(--sectionbgColor2);
+}
+
+/* fixed DHCPv6 lease table host names incorrectly displayed */
+#lease6_status_table > tbody > .cbi-section-table-row.cbi-rowstyle-1 div,
+#lease6_status_table > tbody > .cbi-section-table-row.cbi-rowstyle-2 div{
+  min-width:100%;
+}
+
+/* fix status overview */
+.node-status-overview > .main fieldset:nth-child(6) td:nth-child(2),
+.node-status-overview table[id="wifi_status_table"] > tbody > tr > td {
+    white-space: normal;
 }
 
 /* fix progress bar */
@@ -1792,8 +1805,8 @@ div [id*="cbi-wireless"] [id*="-__status"] table {
 
 div [id*="cbi-network-"] [id*="-__status"] table td,
 div [id*="cbi-wireless"] [id*="-__status"] table td {
-    width: 0;
-    padding: 0;
+    width: auto;
+    padding: 0 !important;
 }
 div [id*="cbi-network-"] [id*="-__status"] table td small,
 div [id*="cbi-wireless"] [id*="-__status"] table td small {
@@ -1811,6 +1824,9 @@ div [id*="cbi-wireless"] [id*="-__status"] table td small {
 .node-network-wireless .cbi-section-table .cbi-section-table-row td[colspan="6"],
 .node-network-wifi .cbi-section-table .cbi-section-table-row td[colspan="8"] {
     text-align: center !important;
+}
+.node-network-wireless #iw-assoclist .cbi-section-table-row td div {
+    max-width: unset !important;
 }
 .node-network-wifi table, td, th {
     border-top: unset !important;
@@ -1845,12 +1861,43 @@ td > table > tbody > tr > td {
     border: none;
 }
 
-div#container\.nlbw\.traffic {
-    /* overflow: auto; */
+#container\.nlbw\.traffic th, 
+#container\.nlbw\.traffic td, 
+#container\.nlbw\.layer7 th, 
+#container\.nlbw\.layer7 td,  
+#container\.nlbw\.ipv6 th,
+#container\.nlbw\.ipv6 td, 
+#container\.nlbw\.export th, 
+#container\.nlbw\.export td {
+    padding: 12px !important;
+    border-top: none;
+    border: unset;
+    text-align: center;
+    /* border-left: #ccc 1px solid;
+    border-right: #ccc 1px solid;
+    border-bottom: #ccc 1px solid; */
+ }
+
+ #container\.nlbw\.traffic tr td:nth-child(4), 
+ #container\.nlbw\.layer7 tr td:nth-child(3), 
+ #container\.nlbw\.ipv6 tr td:nth-child(4), 
+ #container\.nlbw\.export tr td:nth-child(4),
+ #container\.nlbw\.traffic tr td:nth-child(6), 
+ #container\.nlbw\.layer7 tr td:nth-child(5), 
+ #container\.nlbw\.ipv6 tr td:nth-child(6), 
+ #container\.nlbw\.export tr td:nth-child(6) {
+     text-align: right !important;
 }
-div#container\.nlbw\.traffic #host-data {
-    display: block;
-    overflow: auto;
+ 
+ #container\.nlbw\.traffic tr td:nth-child(5), 
+ #container\.nlbw\.layer7 tr td:nth-child(4), 
+ #container\.nlbw\.ipv6 tr td:nth-child(5), 
+ #container\.nlbw\.export tr td:nth-child(5),
+ #container\.nlbw\.traffic tr td:nth-child(7), 
+ #container\.nlbw\.layer7 tr td:nth-child(6), 
+ #container\.nlbw\.ipv6 tr td:nth-child(7), 
+ #container\.nlbw\.export tr td:nth-child(7){
+     text-align: left !important;
 }
 
 td#__status-ifc-signal {
@@ -2571,17 +2618,7 @@ header > .container > .pull-right > * {
     border-radius: 10px;
 }
 
-/* fix status overview */
-
-.node-status-overview > .main fieldset:nth-child(4) td:nth-child(2) {
-    white-space: normal;
-}
-.node-status-overview small {
-    white-space: nowrap;
-}
-
 /* fix status processes */
-
 .node-status-processes > .main table tr td:nth-child(3) {
     white-space: normal;
 }
@@ -2684,28 +2721,6 @@ header > .container > .pull-right > * {
 
 }
 
-#container\.nlbw\.traffic table, 
-#container\.nlbw\.layer7 table, 
-#container\.nlbw\.ipv6 table, 
-#container\.nlbw\.export table {
-    border: #ccc 1px solid;
-}
-
-#container\.nlbw\.traffic th, 
-#container\.nlbw\.traffic td, 
-#container\.nlbw\.layer7 th, 
-#container\.nlbw\.layer7 td,  
-#container\.nlbw\.ipv6 th,
-#container\.nlbw\.ipv6 td, 
-#container\.nlbw\.export th, 
-#container\.nlbw\.export td {
-    padding: 3px;
-    border-top: none;
-    border-left: #ccc 1px solid;
-    border-right: #ccc 1px solid;
-    border-bottom: #ccc 1px solid;
- }
-
 .cbi-tabmenu + .cbi-section ul {
     text-align: left;
 }
@@ -2771,6 +2786,10 @@ header > .container > .pull-right > * {
 .node-system-packages .cbi-tabmenu,
 .node-system-flashops .cbi-tabmenu {
    /* border: none; **/
+}
+
+#cbi-firewall-redirect .cbi-section-table-titles .cbi-section-table-cell {
+    text-align: left;
 }
 
 #cbi-firewall-redirect table *,
@@ -2929,6 +2948,13 @@ body.lang_pl.node-main-login .cbi-value-title {
         overflow: auto;
     }
     .node-nlbw-usage table {
+        display: block;
+        overflow: auto;
+    }
+    #container\.nlbw\.traffic table, 
+    #container\.nlbw\.layer7 table, 
+    #container\.nlbw\.ipv6 table, 
+    #container\.nlbw\.export table {
         display: block;
         overflow: auto;
     }
@@ -3133,6 +3159,33 @@ body.lang_pl.node-main-login .cbi-value-title {
     /* network and wireless table status icon */
     div [id*="cbi-network-"] [id*="-__status"] table td,
     div [id*="cbi-wireless"] [id*="-__status"] table td {
+        white-space: normal;
+    }
+    
+    .node-system-leds .cbi-section em,
+    .node-network-network #cbi-network .cbi-map .cbi-section-table cbi-section-table-row,
+    .node-network-network #cbi-network .cbi-map .cbi-section-table td {
+        display: block;
+    }
+    .node-network-network #cbi-network .cbi-map .cbi-section-table td {
+        width: 100%!important;
+        text-align: center!important;
+        white-space: normal;
+    }
+    .node-network-network #cbi-network .cbi-map .cbi-button {
+        min-width: 60px !important;
+    }
+    .node-network-network .cbi-section-table .cbi-section-table-titles .cbi-section-table-cell {
+        flex: 1!important
+    }
+    .node-network-network .cbi-section-table .cbi-section-table-titles th:nth-child(2) {
+        text-align: center !important;
+    }
+    .node-network-network .cbi-section-table .cbi-section-table-titles {
+        display: flex
+    }
+    .node-network-wireless fieldset:nth-child(1) table > tbody > tr > td,
+    .node-network-wireless fieldset:nth-child(2) table > tbody > tr > td {
         white-space: normal;
     }
 }
